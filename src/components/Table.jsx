@@ -3,7 +3,11 @@ import PlanetsSearchContext from '../context/PlanetsSearchContext';
 import useFetchPlanets from '../hooks/useFetchPlanets';
 
 export default function Table() {
-  const { planetsList, setPlanetsList } = useContext(PlanetsSearchContext);
+  const { planetsList, setPlanetsList, filterByName } = useContext(PlanetsSearchContext);
+
+  const list = filterByName.length
+    ? planetsList.filter(({ name }) => name.includes(filterByName))
+    : planetsList;
 
   useFetchPlanets(setPlanetsList);
 
@@ -27,7 +31,7 @@ export default function Table() {
         </tr>
       </thead>
       <tbody>
-        {planetsList.map((planet) => (
+        {list.map((planet) => (
           <tr key={ planet.name }>
             <td>{ planet.name }</td>
             <td>{ planet.rotation_period }</td>

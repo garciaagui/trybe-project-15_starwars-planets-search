@@ -2,11 +2,13 @@ import React from 'react';
 // import './App.css';
 import Table from './components/Table';
 import Provider from './context/Provider';
+import Filters from './components/Filters';
 
 export default function App() {
   return (
     <Provider>
-      <span>Hello, App!</span>
+      <h1>Star Wars Planets Search</h1>
+      <Filters />
       <Table />
     </Provider>
   );

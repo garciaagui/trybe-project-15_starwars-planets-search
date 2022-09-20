@@ -4,10 +4,13 @@ import PlanetsSearchContext from './PlanetsSearchContext';
 
 function Provider({ children }) {
   const [planetsList, setPlanetsList] = useState([]);
+  const [filterByName, setFilterByName] = useState('');
 
   const contextValue = {
     planetsList,
     setPlanetsList,
+    filterByName,
+    setFilterByName,
   };
 
   return (
