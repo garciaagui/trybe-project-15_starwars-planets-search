@@ -109,6 +109,7 @@ export default function Filters() {
               {`${filter.column} ${filter.comparison} ${filter.value}`}
               <button
                 type="button"
+                data-testid="button-remove-specific-filter"
                 onClick={ () => {
                   setFilterByNumericValues(filterByNumericValues
                     .filter((el) => el.column !== filter.column));
