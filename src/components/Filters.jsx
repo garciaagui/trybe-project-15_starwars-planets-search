@@ -48,11 +48,6 @@ export default function Filters() {
         {notSelectedColumns.map((el) => (
           <option key={ el } value={ el }>{el}</option>
         ))}
-        {/* <option value="population">population</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="surface_water">surface_water</option> */}
       </select>
 
       <select
@@ -109,7 +104,10 @@ export default function Filters() {
       && (
         <ul>
           {filterByNumericValues.map((filter) => (
-            <li key={ filter.column } data-testid="filter">
+            <li
+              key={ filter.column }
+              data-testid="filter"
+            >
               {`${filter.column} ${filter.comparison} ${filter.value}`}
               <button
                 type="button"

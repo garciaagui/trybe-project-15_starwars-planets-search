@@ -9,6 +9,9 @@ function Provider({ children }) {
   const [comparison, setComparison] = useState('maior que');
   const [value, setValue] = useState('0');
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [sortColumn, setSortColumn] = useState('population');
+  const [sort, setSort] = useState('');
+  const [order, setOrder] = useState({});
 
   const contextValue = {
     planetsList,
@@ -23,6 +26,12 @@ function Provider({ children }) {
     setValue,
     filterByNumericValues,
     setFilterByNumericValues,
+    sortColumn,
+    setSortColumn,
+    sort,
+    setSort,
+    order,
+    setOrder,
   };
 
   return (
