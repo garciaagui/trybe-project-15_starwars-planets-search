@@ -89,6 +89,44 @@ export default function Filters() {
         Filter
       </button>
 
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+        onClick={ () => {
+          setFilterByNumericValues([]);
+
+          setColumn('population');
+          setComparison('maior que');
+          setValue('0');
+        } }
+
+      >
+        Remover todas filtragens
+      </button>
+      <br />
+
+      {filterByNumericValues.length > 0
+      && (
+        <ul>
+          {filterByNumericValues.map((filter) => (
+            <li key={ filter.column } data-testid="filter">
+              {`${filter.column} ${filter.comparison} ${filter.value}`}
+              <button
+                type="button"
+                onClick={ () => {
+                  setFilterByNumericValues(filterByNumericValues
+                    .filter((el) => el.column !== filter.column));
+
+                  setColumn(notSelectedColumns.push(filter.column));
+                } }
+              >
+                X
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
     </section>
   );
 }
