@@ -2,15 +2,10 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import PlanetsSearchContext from './PlanetsSearchContext';
 
-function Provider({ children }) {
+export default function Provider({ children }) {
   const [planetsList, setPlanetsList] = useState([]);
   const [filterByName, setFilterByName] = useState('');
-  const [column, setColumn] = useState('population');
-  const [comparison, setComparison] = useState('maior que');
-  const [value, setValue] = useState('0');
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
-  const [sortColumn, setSortColumn] = useState('population');
-  const [sort, setSort] = useState('');
   const [order, setOrder] = useState({});
 
   const contextValue = {
@@ -18,18 +13,8 @@ function Provider({ children }) {
     setPlanetsList,
     filterByName,
     setFilterByName,
-    column,
-    setColumn,
-    comparison,
-    setComparison,
-    value,
-    setValue,
     filterByNumericValues,
     setFilterByNumericValues,
-    sortColumn,
-    setSortColumn,
-    sort,
-    setSort,
     order,
     setOrder,
   };
@@ -44,5 +29,3 @@ function Provider({ children }) {
 Provider.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-export default Provider;

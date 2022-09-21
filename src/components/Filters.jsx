@@ -1,18 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PlanetsSearchContext from '../context/PlanetsSearchContext';
 
 export default function Filters() {
   const {
     filterByName,
     setFilterByName,
-    column,
-    setColumn,
-    comparison,
-    setComparison,
-    value,
-    setValue,
     filterByNumericValues,
     setFilterByNumericValues } = useContext(PlanetsSearchContext);
+
+  const [column, setColumn] = useState('population');
+  const [comparison, setComparison] = useState('maior que');
+  const [value, setValue] = useState('0');
 
   const columnsOptions = ['population',
     'orbital_period',

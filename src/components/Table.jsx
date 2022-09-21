@@ -4,7 +4,8 @@ import useFetchPlanets from '../hooks/useFetchPlanets';
 
 export default function Table() {
   const { planetsList,
-    setPlanetsList, filterByName,
+    setPlanetsList,
+    filterByName,
     filterByNumericValues,
     order } = useContext(PlanetsSearchContext);
 
@@ -37,17 +38,13 @@ export default function Table() {
       : filtered;
   };
 
-  const handleOrderedList = () => {
+  const orderList = () => {
     const filtered = handleFilters();
-    const { sortColumn, sort } = order;
+    const { column, sort } = order;
     return sort
-      ? handleSort(filtered, sortColumn, sort)
+      ? handleSort(filtered, column, sort)
       : filtered;
   };
-
-  // const list = filterByName.length
-  //   ? handleFilterByNumericValues().filter(({ name }) => name.includes(filterByName))
-  //   : handleFilterByNumericValues();
 
   useFetchPlanets(setPlanetsList);
 
@@ -71,7 +68,7 @@ export default function Table() {
         </tr>
       </thead>
       <tbody>
-        {handleOrderedList().map((planet) => (
+        {orderList().map((planet) => (
           <tr key={ planet.name }>
             <td data-testid="planet-name">{ planet.name }</td>
             <td>{ planet.rotation_period }</td>

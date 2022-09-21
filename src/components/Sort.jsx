@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PlanetsSearchContext from '../context/PlanetsSearchContext';
 
 export default function Sort() {
-  const {
-    sortColumn,
-    setSortColumn,
-    sort,
-    setSort,
-    setOrder } = useContext(PlanetsSearchContext);
+  const { setOrder } = useContext(PlanetsSearchContext);
+
+  const [column, setColumn] = useState('population');
+  const [sort, setSort] = useState('');
 
   return (
     <section>
@@ -16,8 +14,8 @@ export default function Sort() {
       <select
         name="column-sort"
         data-testid="column-sort"
-        value={ sortColumn }
-        onChange={ ({ target }) => { setSortColumn(target.value); } }
+        value={ column }
+        onChange={ ({ target }) => { setColumn(target.value); } }
       >
         <option value="population">population</option>
         <option value="orbital_period">orbital_period</option>
@@ -56,9 +54,9 @@ export default function Sort() {
         type="button"
         data-testid="column-sort-button"
         onClick={ () => {
-          setOrder({ sortColumn, sort });
+          setOrder({ column, sort });
 
-          setSortColumn('population');
+          setColumn('population');
           setSort('');
         } }
       >
