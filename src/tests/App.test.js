@@ -165,3 +165,44 @@ it('Testa a remoção individual de filtro', async () => {
   const planetsAfterFilterRemoval = screen.getAllByTestId(/planet-name/i)
   expect(planetsAfterFilterRemoval).toHaveLength(5)
 })
+
+it('Verifica os elementos de ordenação', async () => {
+  render(<App/>)
+
+  await waitFor(() => {
+    expect(screen.getByTestId('column-sort')).toBeInTheDocument();
+    expect(screen.getByTestId(/column-sort-input-asc/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/column-sort-input-desc/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/column-sort-button/i)).toBeInTheDocument();
+  })
+})
+
+it('Verifica se o conteúdo da tabela é ordenado ao utilizar as ferramentas de sort', async () => {
+  render(<App/>)
+  await waitFor(() => {})
+  
+  userEvent.selectOptions(screen.getByTestId('column-sort'), ['diameter'])
+  userEvent.click(screen.getByTestId(/column-sort-input-asc/i))
+  userEvent.click(screen.getByTestId(/column-sort-button/i))
+
+  const ascOrderedPlanets = screen.getAllByTestId(/planet-name/i)
+  const ascPlanetsOrder = ['Endor', 'Hoth', 
+  'Dagobah', 'Yavin IV', 'Tatooine', 'Naboo', 'Coruscant', 'Alderaan', 'Kamino','Bespin']
+
+  ascOrderedPlanets.forEach((planet, index) => {
+    expect(planet).toHaveTextContent(ascPlanetsOrder[index])
+  })
+
+  userEvent.selectOptions(screen.getByTestId('column-sort'), ['rotation_period'])
+  userEvent.click(screen.getByTestId(/column-sort-input-desc/i))
+  userEvent.click(screen.getByTestId(/column-sort-button/i))
+
+  const descOrderedPlanets = screen.getAllByTestId(/planet-name/i)
+  const descPlanetsOrder = ['Kamino', 'Naboo',
+  'Alderaan', 'Yavin IV', 'Coruscant', 'Tatooine', 'Hoth', 'Dagobah', 'Endor', 'Bespin']
+
+  descOrderedPlanets.forEach((planet, index) => {
+    expect(planet).toHaveTextContent(descPlanetsOrder[index])
+  })
+
+})
